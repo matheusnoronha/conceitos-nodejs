@@ -38,10 +38,14 @@ app.put("/repositories/:id", (request, response) => {
   if (repositoryIndex < 0) {
     return response.status(400).json({ error: 'Repository not exist' })
   }
-
-  repositories[repositoryIndex].title = title
-  repositories[repositoryIndex].url = url
-  repositories[repositoryIndex].techs = techs
+  const newRepository = {
+    id,
+    title,
+    url,
+    techs,
+    likes: repositories[repositoryIndex].likes
+  }
+  repositories[repositoryIndex] = newRepository;
 
   return response.json(repositories[repositoryIndex])
   
